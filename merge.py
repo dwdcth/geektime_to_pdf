@@ -14,12 +14,12 @@ def merge(pdf_dir, out_file):
     for i in pdf_files:
         print(i)
     print("waiting...")
-    pdf_writer = PyPDF2.PdfFileWriter()  
+    pdf_writer = PyPDF2.PdfWriter()  
 
     for fileName in pdf_files:
-        pdf_reader = PyPDF2.PdfFileReader(open(os.path.join(pdf_dir, fileName), 'rb')) 
-        for pageNum in range(pdf_reader.numPages):
-            pdf_writer.addPage(pdf_reader.getPage(pageNum))  
+        pdf_reader = PyPDF2.PdfReader(open(os.path.join(pdf_dir, fileName), 'rb')) 
+        for pageNum in range(len(pdf_reader.pages)):
+            pdf_writer.add_page(pdf_reader.pages[pageNum])  
 
     pdf_output = open(out_file, 'wb')  
     pdf_writer.write(pdf_output)  
